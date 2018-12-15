@@ -15,12 +15,16 @@ public class ItemAdapter extends BaseAdapter {
     private final Context context;
     List<Item> itemList;
     LayoutInflater layoutInflater;
+    DatabaseAdapter databaseAdapter;
 
-   public ItemAdapter(List<Item> itemList, Context context){
+   public ItemAdapter(List<Item> itemList, Context context, DatabaseAdapter databaseAdapter){
        this.itemList=itemList;
        this.context=context;
        layoutInflater=LayoutInflater.from(context);
+       this.databaseAdapter=databaseAdapter;
    }
+
+
     @Override
     public int getCount() {
         return itemList.size();
@@ -65,6 +69,9 @@ public class ItemAdapter extends BaseAdapter {
     public void Additem(Item item){
 
        this.itemList.add(item);
+
+       databaseAdapter.AddItem(item);
+
        this.notifyDataSetChanged();
 
     }
